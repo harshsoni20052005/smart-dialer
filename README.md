@@ -4,8 +4,8 @@ A functional SmartDialer prototype integrating a Predictive Pacing Engine regula
 
 ## Setup Instructions
 
-**1. Start the Database**
-The system relies on PostgreSQL for ACID-compliant state management and concurrency locking.
+**1. Start the Database & Redis Cache**
+The system relies on PostgreSQL for ACID-compliant borrower state management, and Redis for high-speed, lock-free agent allocation.
 `docker-compose up -d`
 
 **2. Install Dependencies**
@@ -19,3 +19,7 @@ The system relies on PostgreSQL for ACID-compliant state management and concurre
 **4. Run the Simulator**
 Execute the required scenarios (A, B, C, D) to observe pacing and safety decisions.
 `python simulator.py --scenario A`
+
+**5. Run the Load Test**
+Verify the Redis Lua atomic allocator handles 500 concurrent worker collisions effortlessly:
+`python load_test.py`
